@@ -23,19 +23,19 @@ const MainScreen = ({ navigation }) => {
         <TextInput style={[styles.input, {flex:1}]} placeholder="Search" placeholderTextColor="#B9B9C5" onChangeText={setText} value={text}></TextInput>
       </View>
       <Text>{text}</Text>
-      <View style={{ height: 100 }}>
+      <View style={{ height: 120 }}>
         <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{ marginVertical: 20, alignItems: "center" }} horizontal={true}>
           <View style={{ height: 40, width: 40, backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 10, borderStyle: "dotted", borderWidth: 5, borderColor: "#E2E2E2" }} />
-          <HorizontalCircles color={"#CFC8FF"} />
-          <HorizontalCircles color={"#FFA2BF"} />
-          <HorizontalCircles color={"#FEE3AA"} />
-          <HorizontalCircles color={"#FEDFCC"} />
-          <HorizontalCircles color={"#FFA2BF"} />
-          <HorizontalCircles color={"#F3A5FF"} />
-          <HorizontalCircles color={"#EFBCFF"} />
-          <HorizontalCircles color={"#AFBFCF"} />
-          <HorizontalCircles color={"#AEDF5F"} />
-          <HorizontalCircles color={"#DDB825"} />
+          <HorizontalCircles colorFirst={"#CFC8FF"} colorSecond={"#4CC98F"}/>
+          <HorizontalCircles colorFirst={"#FFA2BF"} colorSecond={"#FFD24D"}/>
+          <HorizontalCircles colorFirst={"#FEE3AA"} colorSecond={"#4DC98F"}/>
+          <HorizontalCircles colorFirst={"#FEDFCC"} colorSecond={"#B3C2D8"}/>
+          <HorizontalCircles colorFirst={"#FFA2BF"} colorSecond={"#FF3FFF"}/>
+          <HorizontalCircles colorFirst={"#F3A5FF"} colorSecond={"#1CB28F"}/>
+          <HorizontalCircles colorFirst={"#EFBCFF"} colorSecond={"#22398F"}/>
+          <HorizontalCircles colorFirst={"#AFBFCF"} colorSecond={"#44798F"}/>
+          <HorizontalCircles colorFirst={"#AEDF5F"} colorSecond={"#98C98F"}/>
+          <HorizontalCircles colorFirst={"#DDB825"} colorSecond={"#359424"}/>
         </ScrollView>
       </View>
 
