@@ -1,11 +1,13 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Dimensions } from "react-native";
 
 
 const HorizontalDiscussion = (props) => {
 
   return (
     <View style={{
+      // window is the visible area, screen is all the area
+      width:Dimensions.get("screen").width-90,
       backgroundColor: props.color,
       borderRadius: 25,
       padding: 25,
@@ -17,7 +19,8 @@ const HorizontalDiscussion = (props) => {
       </View>
       <View>
         <Text style={styles.grayText}>Topic</Text>
-        <Text style={styles.blackText}>Human Resources Analysis</Text>
+         {/* adjustsFontSizeToFit={true} fits it in the space */}
+        <Text style={styles.blackText} adjustsFontSizeToFit={true} numberOfLines={1} minimumFontScale={.7}>Human Resources Analysis</Text> 
         <Text style={styles.grayText}>By Emran Emon</Text>
         <View style={styles.circles}>
           <View style={{ height: 40, width: 40, backgroundColor: "#DDF0F8", borderRadius: 25, marginLeft: 5, borderWidth: 1, borderColor: "white" }} />
@@ -50,7 +53,6 @@ const styles = StyleSheet.create({
   blackText: {
     fontSize: 20,
     fontWeight: "bold",
-    fontFamily: "Times New Roman",
   },
   circles: {
     flexDirection: "row",
