@@ -38,18 +38,31 @@ const MainScreen = ({ navigation }) => {
     // Dumy Data
     const tmpUsers = [];
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 1; i++) {
       const rand = Math.round(Math.random() * 255);
       const rand2 = Math.round(Math.random() * 255);
       const rand3 = Math.round(Math.random() * 255);
 
-      tmpUsers.push(<HorizontalCircles colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />
-    )
+      tmpUsers.push(<HorizontalCircles key={i} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />)
     }
     setTimeout(() => {
       setUsers(tmpUsers);
     }, 5000);
 
+  }
+
+  const AddNewUser = () => {
+    console.log("New user added");
+
+    const tmpUsers = users;
+
+    const rand = Math.round(Math.random() * 255);
+    const rand2 = Math.round(Math.random() * 255);
+    const rand3 = Math.round(Math.random() * 255);
+    //tmpUsers.push(<HorizontalCircles key={tmpUsers.length} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />)
+    const newUser = <HorizontalCircles key={tmpUsers.length} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />
+
+    setUsers(old => [...old, newUser]);
   }
 
   const getDiscussion = () => {
@@ -98,9 +111,12 @@ const MainScreen = ({ navigation }) => {
         <View>
           <ScrollView snapToInterval={75} showsHorizontalScrollIndicator={false}
             contentContainerStyle={{ paddingVertical: 20, alignItems: "center" }} horizontal={true}>
-            <View style={{ alignItems: "center", justifyContent: "center", height: 40, width: 40, backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 15, marginLeft: 20, borderStyle: "dotted", borderWidth: 5, borderColor: "#E2E2E2" }}>
-              <Text style={{ fontSize: 26, color: "#E2E2E2", lineHeight: 30, }}>+</Text>
-            </View>
+            
+            <TouchableWithoutFeedback onPress={AddNewUser}>
+              <View style={{ alignItems: "center", justifyContent: "center", height: 40, width: 40, backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 15, marginLeft: 20, borderStyle: "dotted", borderWidth: 5, borderColor: "#E2E2E2" }}>
+                <Text style={{ fontSize: 26, color: "#E2E2E2", lineHeight: 30, }}>+</Text>
+              </View>
+            </TouchableWithoutFeedback>           
 
             {users}
             {/* <HorizontalCircles colorFirst={"#CFC8FF"} colorSecond={"#4CC98F"} />  we made here more effective using useState and useEffect*/}
