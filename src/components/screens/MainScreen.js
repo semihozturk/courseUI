@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TouchableWithoutFeedback, StyleSheet, Text, View, SafeAreaView, TextInput, ScrollView, TouchableHighlight } from 'react-native';
+import { TouchableWithoutFeedback, StyleSheet, Text, View, SafeAreaView, TextInput, ScrollView, TouchableHighlight, Dimensions } from 'react-native';
 import Application from "../icons/application.svg"
 import HorizontalCircles from '../HorizontalCircles';
 import HorizontalDiscussion from "../HorizontalDiscussion";
@@ -20,6 +20,62 @@ const MainScreen = ({ navigation }) => {
 
   const inputRef = useRef(); // to make "O" letter in textinput clickable
   const [text, setText] = useState("");
+
+  const [users, setUsers] = useState([
+    <HorizontalCircles skeleton={true} key={0} colorFirst={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} colorSecond={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}/>,
+    <HorizontalCircles skeleton={true} key={1} colorFirst={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} colorSecond={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}/>,
+
+  ])
+
+  const [horizontalDiscussion, setHorizontalDiscussion] = useState([
+    <HorizontalDiscussion skeleton = {true} key={0} color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} />,
+    <HorizontalDiscussion skeleton = {true} key={1} color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} />,
+
+  ]); 
+
+  const getUsers = () => {
+    // TODO: get discussion from SERVER
+    // Dumy Data
+    const tmpUsers = [];
+
+    for (let i = 0; i < 15; i++) {
+      const rand = Math.round(Math.random() * 255);
+      const rand2 = Math.round(Math.random() * 255);
+      const rand3 = Math.round(Math.random() * 255);
+
+      tmpUsers.push(<HorizontalCircles colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />
+    )
+    }
+    setTimeout(() => {
+      setUsers(tmpUsers);
+    }, 5000);
+
+  }
+
+  const getDiscussion = () => {
+    // TODO: get discussion from SERVER
+    // Dumy Data
+    const tmpHorizontal = [];
+
+    for (let i = 2; i < 7; i++) {
+      const rand = Math.round(Math.random() * 255);
+      const rand2 = Math.round(Math.random() * 255);
+      const rand3 = Math.round(Math.random() * 255);
+
+      tmpHorizontal.push(<HorizontalDiscussion key={i} color={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} />)
+    }
+    setTimeout(() => {
+      setHorizontalDiscussion(tmpHorizontal);
+    },3000);
+
+  }
+
+  useEffect(() => {
+    getUsers();
+    getDiscussion();
+  }, [])
+
+
   return (
     // for ios, i add safeareview and flex:1, otherwise height doesnt become 100%
     <SafeAreaView style={{ flex: 1, }} >
@@ -41,20 +97,13 @@ const MainScreen = ({ navigation }) => {
         we can give height for view, and make flex:1 for scrollview */}
         <View>
           <ScrollView snapToInterval={75} showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingVertical: 20, alignItems: "center" }} horizontal={true}>
+            contentContainerStyle={{ paddingVertical: 20, alignItems: "center" }} horizontal={true}>
             <View style={{ alignItems: "center", justifyContent: "center", height: 40, width: 40, backgroundColor: "#FFFFFF", borderRadius: 20, marginRight: 15, marginLeft: 20, borderStyle: "dotted", borderWidth: 5, borderColor: "#E2E2E2" }}>
               <Text style={{ fontSize: 26, color: "#E2E2E2", lineHeight: 30, }}>+</Text>
             </View>
-            <HorizontalCircles colorFirst={"#CFC8FF"} colorSecond={"#4CC98F"} />
-            <HorizontalCircles colorFirst={"#FFA2BF"} colorSecond={"#FFD24D"} />
-            <HorizontalCircles colorFirst={"#FEE3AA"} colorSecond={"#4DC98F"} />
-            <HorizontalCircles colorFirst={"#FEDFCC"} colorSecond={"#B3C2D8"} />
-            <HorizontalCircles colorFirst={"#FFA2BF"} colorSecond={"#FF3FFF"} />
-            <HorizontalCircles colorFirst={"#F3A5FF"} colorSecond={"#1CB28F"} />
-            <HorizontalCircles colorFirst={"#EFBCFF"} colorSecond={"#22398F"} />
-            <HorizontalCircles colorFirst={"#AFBFCF"} colorSecond={"#44798F"} />
-            <HorizontalCircles colorFirst={"#AEDF5F"} colorSecond={"#98C98F"} />
-            <HorizontalCircles colorFirst={"#DDB825"} colorSecond={"#359424"} />
+
+            {users}
+            {/* <HorizontalCircles colorFirst={"#CFC8FF"} colorSecond={"#4CC98F"} />  we made here more effective using useState and useEffect*/}
           </ScrollView>
         </View>
 
@@ -63,9 +112,8 @@ const MainScreen = ({ navigation }) => {
           <Text style={styles.blackText}>Group Discussion On Going</Text>
 
           <View style={{ height: 250 }}>
-            <ScrollView snapToInterval={300} horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: "row", alignItems: "center", paddingLeft: 20, }}>
-              <HorizontalDiscussion color={"#FFF9F2"} />
-              <HorizontalDiscussion color={"#E7FBFF"} />
+            <ScrollView snapToInterval={Dimensions.get("screen").width - 70} horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ flexDirection: "row", alignItems: "center", paddingLeft: 20, }}>
+              {horizontalDiscussion}
             </ScrollView>
           </View>
 
@@ -115,7 +163,7 @@ const MainScreen = ({ navigation }) => {
 
           {/* Proposed Class part */}
           <View style={{ padding: 30 }}>
-            <View style={{backgroundColor:"white",borderRadius:20,padding:10,elevation:1,}}>
+            <View style={{ backgroundColor: "white", borderRadius: 20, padding: 10, elevation: 1, }}>
               <Text style={{ color: "#9993D3", fontSize: 18 }}>Math class</Text>
               <View style={styles.proposed}>
                 <Text style={{ color: "#706E80", fontSize: 20 }}>Rasyid Hilman</Text>
