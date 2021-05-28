@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { TouchableWithoutFeedback, StyleSheet, Text, View, SafeAreaView, TextInput, ScrollView, TouchableHighlight, Dimensions } from 'react-native';
 import Application from "../icons/application.svg"
 import HorizontalCircles from '../HorizontalCircles';
@@ -8,6 +8,7 @@ import Add from "../icons/add.svg"
 import Calendar from "../icons/calendar.svg"
 import Clock from "../icons/clock.svg"
 
+import { UserContext } from "../../context/UserContextManager";
 const MainScreen = ({ navigation }) => {
 
   useEffect(() => {
@@ -21,11 +22,13 @@ const MainScreen = ({ navigation }) => {
   const inputRef = useRef(); // to make "O" letter in textinput clickable
   const [text, setText] = useState("");
 
-  const [users, setUsers] = useState([
+ /*  const [users, setUsers] = useState([
     <HorizontalCircles skeleton={true} key={0} colorFirst={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} colorSecond={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}/>,
     <HorizontalCircles skeleton={true} key={1} colorFirst={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} colorSecond={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}/>,
 
-  ])
+  ]) */
+
+  const [users, setUsers] = useContext(UserContext);
 
   const [horizontalDiscussion, setHorizontalDiscussion] = useState([
     <HorizontalDiscussion skeleton = {true} key={0} color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} />,
@@ -36,6 +39,8 @@ const MainScreen = ({ navigation }) => {
   const getUsers = () => {
     // TODO: get discussion from SERVER
     // Dumy Data
+    console.log("Getting Users");
+
     const tmpUsers = [];
 
     for (let i = 0; i < 1; i++) {
@@ -50,9 +55,51 @@ const MainScreen = ({ navigation }) => {
     }, 5000);
 
   }
+  /*
+const getUsers = () => {
+    // TODO: get discussion from SERVER
+    // Dumy Data
+    console.log("Getting Users");
+
+    global.getUsers((userData)=> {
+    const tmpUsers = [];
+
+    for (let i = 0; i < 1; i++) {
+      const rand = Math.round(Math.random() * 255);
+      const rand2 = Math.round(Math.random() * 255);
+      const rand3 = Math.round(Math.random() * 255);
+
+      tmpUsers.push(<HorizontalCircles key={i} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />)
+    }
+    setTimeout(() => {
+      setUsers(tmpUsers);
+    }, 5000);
+
+    })
+    
+  }
+
+  */
+
+  /*
+  const AddNewUser = () => {
+    console.log("Adding a New User");
+
+    const rand = Math.round(Math.random() * 255);
+    const rand2 = Math.round(Math.random() * 255);
+    const rand3 = Math.round(Math.random() * 255);
+
+    global.AddNewUser(rand,rand2,rand3,()=> {
+      const newUser = <HorizontalCircles key={tmpUsers.length} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />
+
+      setUsers(old => [...old, newUser]);
+    })
+    
+  }
+*/
 
   const AddNewUser = () => {
-    console.log("New user added");
+    console.log("Adding a New User");
 
     const tmpUsers = users;
 
@@ -68,6 +115,8 @@ const MainScreen = ({ navigation }) => {
   const getDiscussion = () => {
     // TODO: get discussion from SERVER
     // Dumy Data
+
+    console.log("Getting Discussion Card")
     const tmpHorizontal = [];
 
     for (let i = 2; i < 7; i++) {
