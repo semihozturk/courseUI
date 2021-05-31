@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import HorizontalCircles from "../components/HorizontalDiscussion";
+import HorizontalDiscussion from "../components/HorizontalDiscussion";
 
 export const UserContext = createContext();
 
@@ -20,8 +21,22 @@ function UserContextManager(props) {
     />,
   ]);
 
+  const [horizontalDiscussion, setHorizontalDiscussion] = useState([
+    <HorizontalDiscussion 
+      skeleton={true} 
+      key={0} 
+      color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} 
+    />,
+    <HorizontalDiscussion 
+      skeleton={true} 
+      key={1} 
+      color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} 
+    />,
+
+  ]);
+
   return (
-    <UserContext.Provider value={[users, setUsers]}>
+    <UserContext.Provider value={{users, setUsers, horizontalDiscussion, setHorizontalDiscussion}}>
       {props.children}
     </UserContext.Provider>
   );

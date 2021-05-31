@@ -21,20 +21,17 @@ const MainScreen = ({ navigation }) => {
 
   const inputRef = useRef(); // to make "O" letter in textinput clickable
   const [text, setText] = useState("");
-
- /*  const [users, setUsers] = useState([
-    <HorizontalCircles skeleton={true} key={0} colorFirst={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} colorSecond={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}/>,
-    <HorizontalCircles skeleton={true} key={1} colorFirst={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} colorSecond={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}/>,
-
-  ]) */
-
+/* 
   const [users, setUsers] = useContext(UserContext);
+  const [horizontalDiscussion, setHorizontalDiscussion] = useContext(UserContext);
 
-  const [horizontalDiscussion, setHorizontalDiscussion] = useState([
-    <HorizontalDiscussion skeleton = {true} key={0} color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} />,
-    <HorizontalDiscussion skeleton = {true} key={1} color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"} />,
+  Always use object destructuring to get context value. array destructuring is required if you're using useReducer.
+  
+  array destructuring works if i manage one state with context value too
+  but if its more than one state, have to use object destructuring
+ */
+  const { users, setUsers, horizontalDiscussion, setHorizontalDiscussion } = useContext(UserContext);
 
-  ]); 
 
   const getUsers = () => {
     // TODO: get discussion from SERVER
@@ -55,48 +52,6 @@ const MainScreen = ({ navigation }) => {
     }, 5000);
 
   }
-  /*
-const getUsers = () => {
-    // TODO: get discussion from SERVER
-    // Dumy Data
-    console.log("Getting Users");
-
-    global.getUsers((userData)=> {
-    const tmpUsers = [];
-
-    for (let i = 0; i < 1; i++) {
-      const rand = Math.round(Math.random() * 255);
-      const rand2 = Math.round(Math.random() * 255);
-      const rand3 = Math.round(Math.random() * 255);
-
-      tmpUsers.push(<HorizontalCircles key={i} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />)
-    }
-    setTimeout(() => {
-      setUsers(tmpUsers);
-    }, 5000);
-
-    })
-    
-  }
-
-  */
-
-  /*
-  const AddNewUser = () => {
-    console.log("Adding a New User");
-
-    const rand = Math.round(Math.random() * 255);
-    const rand2 = Math.round(Math.random() * 255);
-    const rand3 = Math.round(Math.random() * 255);
-
-    global.AddNewUser(rand,rand2,rand3,()=> {
-      const newUser = <HorizontalCircles key={tmpUsers.length} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />
-
-      setUsers(old => [...old, newUser]);
-    })
-    
-  }
-*/
 
   const AddNewUser = () => {
     console.log("Adding a New User");
