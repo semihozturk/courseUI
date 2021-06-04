@@ -95,10 +95,9 @@ const MainScreen = ({ navigation }) => {
   const getDiscussion = () => {
     console.log("Getting Discussion Card")
     const g_discussion = global.GetDiscussion();
-    const tmpHorizontal = g_discussion.map((item, index) => {
+    const tmpHorizontal = g_discussion.map((item, index) => {return(
       <HorizontalDiscussion key={index} color={item.color} isLive={item.isLive} type={item.type} title={item.title} author={item.author} />
-    } 
-    )
+    )})
 
     setTimeout(() => {
       setHorizontalDiscussion(tmpHorizontal);

@@ -4,9 +4,9 @@ import { Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback } from "re
 
 const HorizontalDiscussion = (props) => {
 
-  
 
-  if (props.skeleton ===true) {
+
+  if (props.skeleton === true) {
     return (
       <View style={{
         // window is the visible area, screen is all the area
@@ -57,10 +57,12 @@ onPressOut runs when we stop clicking */}
         padding: 25,
         marginRight: 20,
       }}>
+
         <View style={styles.firstDiscussion}>
-          <View style={{ height: 10, width: 10, backgroundColor: "red", borderRadius: 10, }} />
-          <Text style={{ marginLeft: 10 }}>{props.isLive}</Text>
+          <View style={{ height: 10, width: 10, backgroundColor: props.isLive ? "red" : "black", borderRadius: 10, }} />
+          <Text style={{ marginLeft: 10 }}>{props.isLive ? "Live":""}</Text>
         </View>
+
         <View>
           <Text style={styles.grayText}>{props.topic}</Text>
           {/* adjustsFontSizeToFit={true} fits it in the space */}
@@ -89,7 +91,7 @@ onPressOut runs when we stop clicking */}
 
     )
   }
-  
+
 }
 
 const styles = StyleSheet.create({
