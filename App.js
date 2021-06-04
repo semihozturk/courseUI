@@ -6,7 +6,7 @@ import MainScreen from './src/components/screens/MainScreen';
 import NewScreen from './src/components/screens/NewScreen';
 import AnotherScreen from "./src/components/screens/AnotherScreen";
 
-import  UserContextManager  from "./src/context/UserContextManager";
+import  GlobalContextManager  from "./src/context/GlobalContextManager";
 
 
 const Stack = createStackNavigator();
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 const App = () => {
 
   return (
-    <UserContextManager>
+    <GlobalContextManager>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={MainScreen} />
@@ -23,7 +23,7 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
 
-    </UserContextManager>
+    </GlobalContextManager>
 
   );
 }

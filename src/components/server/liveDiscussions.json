@@ -1,0 +1,37 @@
+{
+  "errorCode": -1,
+  "data": {
+    "cards": [
+      {
+        "isLive": true,
+        "type": "Topic",
+        "title": "Human Resources Analysis",
+        "author": "Emran Emon",
+        "attendees": 12,
+        "color": "#FFF9F2",
+        "circles":[
+          "white",
+          "yellow",
+          "red",
+          "gray"
+        ],
+        "attendeesColor":"pink"
+      },
+      {
+        "isLive": false,
+        "type": "Topic",
+        "title": "React Native Course UI",
+        "author": "Matias Delgado",
+        "attendees": 12,
+        "color": "#E7FBFF",
+        "circles": [
+          "white",
+          "yellow",
+          "red",
+          "gray"
+        ],
+        "attendeesColor": "pink"
+      }
+    ]
+  }
+}

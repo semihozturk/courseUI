@@ -4,6 +4,8 @@ import { Text, View, StyleSheet, Dimensions, TouchableWithoutFeedback } from "re
 
 const HorizontalDiscussion = (props) => {
 
+  
+
   if (props.skeleton ===true) {
     return (
       <View style={{
@@ -35,7 +37,7 @@ onPressOut runs when we stop clicking */}
               <View style={{ height: 40, width: 40, backgroundColor: "#A29E97", borderRadius: 25, marginLeft: -5, borderWidth: 1, borderColor: "white" }} />
               <View style={{ height: 40, width: 40, backgroundColor: "#A29E97", borderRadius: 25, marginLeft: -5, borderWidth: 1, borderColor: "white" }} />
               <View style={{ height: 30, width: 30, backgroundColor: "#A29E97", borderRadius: 25, marginLeft: -5, borderWidth: 1, borderColor: "white", alignItems: "center", justifyContent: "center" }}>
-                <Text style={[{ textAlign: "center" }, styles.grayText]}>--</Text>
+                <Text style={[{ textAlign: "center" }, styles.grayText]}>+8</Text>
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -57,13 +59,13 @@ onPressOut runs when we stop clicking */}
       }}>
         <View style={styles.firstDiscussion}>
           <View style={{ height: 10, width: 10, backgroundColor: "red", borderRadius: 10, }} />
-          <Text style={{ marginLeft: 10 }}>Live</Text>
+          <Text style={{ marginLeft: 10 }}>{props.isLive}</Text>
         </View>
         <View>
-          <Text style={styles.grayText}>Topic</Text>
+          <Text style={styles.grayText}>{props.topic}</Text>
           {/* adjustsFontSizeToFit={true} fits it in the space */}
-          <Text style={styles.blackText} adjustsFontSizeToFit={true} numberOfLines={1} minimumFontScale={.7}>Human Resources Analysis</Text>
-          <Text style={styles.grayText}>By Emran Emon</Text>
+          <Text style={styles.blackText} adjustsFontSizeToFit={true} numberOfLines={1} minimumFontScale={.7}>{props.title}</Text>
+          <Text style={styles.grayText}>{props.author}</Text>
 
           {/* onPressIn runs when we click, onLongPress runs when we long press
 and when we click one time, it gets in onPressIn first, then onPress

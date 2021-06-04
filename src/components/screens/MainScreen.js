@@ -7,8 +7,9 @@ import Energy from "../icons/energy.svg"
 import Add from "../icons/add.svg"
 import Calendar from "../icons/calendar.svg"
 import Clock from "../icons/clock.svg"
+import { GlobalContext } from '../../context/GlobalContextManager';
 
-import { UserContext } from "../../context/UserContextManager";
+// import { UserContext } from "../../context/UserContextManager";
 const MainScreen = ({ navigation }) => {
 
   useEffect(() => {
@@ -18,6 +19,8 @@ const MainScreen = ({ navigation }) => {
       .catch((error) => console.error(error))
       .finally(() => console.log("bitti"));
   }, []);
+
+  const global = useContext(GlobalContext);
 
   const inputRef = useRef(); // to make "O" letter in textinput clickable
   const [text, setText] = useState("");
@@ -30,23 +33,45 @@ const MainScreen = ({ navigation }) => {
   array destructuring works if i manage one state with context value too
   but if its more than one state, have to use object destructuring
  */
-  const { users, setUsers, horizontalDiscussion, setHorizontalDiscussion } = useContext(UserContext);
+  // const { users, setUsers, horizontalDiscussion, setHorizontalDiscussion } = useContext(UserContext);
+
+  const [users, setUsers] = useState([
+    <HorizontalCircles
+      skeleton={true}
+      key={0}
+      colorFirst={'rgb(' + 100 + ',' + 100 + ',' + 100 + ')'}
+      colorSecond={'rgb(' + 100 + ',' + 100 + ',' + 100 + ')'}
+    />,
+    <HorizontalCircles
+      skeleton={true}
+      key={1}
+      colorFirst={'rgb(' + 100 + ',' + 100 + ',' + 100 + ')'}
+      colorSecond={'rgb(' + 100 + ',' + 100 + ',' + 100 + ')'}
+    />,
+  ]);
+
+  const [horizontalDiscussion, setHorizontalDiscussion] = useState([
+    <HorizontalDiscussion
+      skeleton={true}
+      key={0}
+      color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}
+    />,
+    <HorizontalDiscussion
+      skeleton={true}
+      key={1}
+      color={"rgb(" + 100 + "," + 100 + "," + 100 + ")"}
+    />,
+
+  ]);
 
 
   const getUsers = () => {
-    // TODO: get discussion from SERVER
-    // Dumy Data
-    console.log("Getting Users");
 
-    const tmpUsers = [];
+    console.log("users from global:",global.GetUsers());
 
-    for (let i = 0; i < 1; i++) {
-      const rand = Math.round(Math.random() * 255);
-      const rand2 = Math.round(Math.random() * 255);
-      const rand3 = Math.round(Math.random() * 255);
-
-      tmpUsers.push(<HorizontalCircles key={i} colorFirst={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} colorSecond={"rgb(" + rand3 + "," + rand + "," + rand2 + ")"} />)
-    }
+    const g_users =  global.GetUsers();
+    const tmpUsers = g_users.map((item, index) => <HorizontalCircles key={index} colorFirst={item.colorFirst} colorSecond={item.colorSecond} />)
+    
     setTimeout(() => {
       setUsers(tmpUsers);
     }, 5000);
@@ -68,24 +93,19 @@ const MainScreen = ({ navigation }) => {
   }
 
   const getDiscussion = () => {
-    // TODO: get discussion from SERVER
-    // Dumy Data
-
     console.log("Getting Discussion Card")
-    const tmpHorizontal = [];
+    const g_discussion = global.GetDiscussion();
+    const tmpHorizontal = g_discussion.map((item, index) => {
+      <HorizontalDiscussion key={index} color={item.color} isLive={item.isLive} type={item.type} title={item.title} author={item.author} />
+    } 
+    )
 
-    for (let i = 2; i < 7; i++) {
-      const rand = Math.round(Math.random() * 255);
-      const rand2 = Math.round(Math.random() * 255);
-      const rand3 = Math.round(Math.random() * 255);
-
-      tmpHorizontal.push(<HorizontalDiscussion key={i} color={"rgb(" + rand + "," + rand2 + "," + rand3 + ")"} />)
-    }
     setTimeout(() => {
       setHorizontalDiscussion(tmpHorizontal);
-    },3000);
+    }, 3000);
 
   }
+
 
   useEffect(() => {
     getUsers();
